@@ -46,10 +46,10 @@ The goal isn't to make every post sound the same — it's to remove the invisibl
 ## Install
 
 ```bash
-skiss sh NetanelRotem/linkedin-post-writer-and-validator
+npx skills add NetanelRotem/linkedin-post-writer-and-validator
 ```
 
-Requires [Claude Code](https://claude.ai/code) and [skiss](https://github.com/netanelrotm/skiss).
+Requires [Claude Code](https://claude.ai/code).
 
 ---
 
