@@ -1,6 +1,6 @@
 ---
-name: linkedin-post-writer
-description: Write viral LinkedIn posts optimized for the 2026 Interest Graph algorithm. Supports Hebrew and English. Use when the user asks to write a LinkedIn post, draft LinkedIn content, create a post for LinkedIn, or mentions LinkedIn publishing.
+name: linkedin-post-writer-and-validator
+description: Write viral LinkedIn posts optimized for the 2026 Interest Graph algorithm, and validate posts before publishing. Supports Hebrew and English. Use when the user asks to write a LinkedIn post, draft LinkedIn content, create a post for LinkedIn, validate a post, or mentions LinkedIn publishing.
 ---
 
 # LinkedIn Viral Post Writer
@@ -64,13 +64,13 @@ Use the **Problem → Solution → Proof** framework:
 - **One idea per line.** Short sentences.
 - **White space between paragraphs.** Never write a wall of text.
 - **Use line breaks aggressively** — each new thought gets its own line.
-- **Bullets or numbered lists** for actionable items (max 5-7 items).
+- **Only numbered lists** for actionable items (max 5-7 items). Never use bullet points (•, -, *).
 - **Bold key phrases** sparingly for scannability.
 - Mobile-first: the post will be read on a phone by 72% of users.
 
 ### Hebrew-specific formatting:
 - Keep sentences even shorter — Hebrew reads denser on mobile.
-- Use "—" (em dash) for emphasis.
+- **Never use "—" (em dash)** — not for emphasis, not for rhythm, not at all.
 - Alternate between short and medium-length sentences for rhythm.
 
 ---
@@ -119,6 +119,8 @@ Recommend a format based on the content type (ranked by engagement rate):
 These will kill reach:
 
 - **External links in post body** → -60% reach. Put links in first comment or say "Link in comments".
+- **Implied URLs** — any pattern like `word.word` (e.g. `bit.ly`, `go.co`, `A.B`) triggers LinkedIn's URL detector even without `http://`. LinkedIn will auto-hyperlink it and penalize reach. Remove or rewrite these patterns.
+- **Em dash "—"** → avoid entirely; use a comma, period, or line break instead.
 - **More than 5 @mentions** → flagged as spam.
 - **Editing within 20 minutes** of publishing → hurts momentum ranking.
 - **Generic AI-sounding text** → low quality score.
@@ -155,7 +157,9 @@ Before delivering the final post, verify:
 - [ ] No wall of text — short paragraphs, white space, line breaks
 - [ ] Contains specific data, story, or example (not just opinions)
 - [ ] Ends with a specific, open-ended question
-- [ ] No external links in body
+- [ ] No external links in body (http/https/www)
+- [ ] No implied URLs — no `word.word` patterns (two letter/word sequences joined by a dot)
+- [ ] No em dashes "—" anywhere in the post
 - [ ] No engagement bait phrases
 - [ ] ≤ 5 hashtags at the bottom
 - [ ] Authentic human voice (not AI-generic)
