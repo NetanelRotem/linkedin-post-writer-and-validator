@@ -16,6 +16,8 @@ The gap isn't authenticity — it's structure. LinkedIn's algorithm rewards spec
 
 On top of that, LinkedIn silently penalizes posts that contain URLs — even implied ones. A pattern like `bit.ly` or `go.co` in the body of a post is auto-hyperlinked by LinkedIn and triggers a reach penalty of up to 60%. Most people never know why their post underperformed.
 
+And now there's a newer trap: posts that *sound* AI-generated. As more of the feed is drafted by language models, readers have learned to spot the tells — the uniform rhythm, the "tapestry of robust, seamless solutions" lexicon, the "Here's the thing..." openers, the "it's not X, it's not Y, it's Z" drama. The brain flags those patterns as marketing spam and keeps scrolling. Polished, machine-sounding posts see engagement around 0.4%, while imperfect, human-sounding ones get several times more.
+
 ---
 
 ## What this skill does
@@ -23,6 +25,8 @@ On top of that, LinkedIn silently penalizes posts that contain URLs — even imp
 This is a **Claude Code skill** — install it once, and Claude knows how to help you write and validate LinkedIn posts in any conversation.
 
 **Writing:** Claude guides you through a proven post structure (hook → problem → solution → proof → CTA), adapted for Hebrew or English, with formatting rules tuned for mobile and LinkedIn's 2026 Interest Graph algorithm.
+
+**Human voice (defeating AI detection):** A dedicated rule set keeps the output from reading as machine-generated, in both Hebrew and English. It bans the negation-contrast structure, academic transition words, and manufactured "Here's the thing" openers; blocks the machine lexicon (tapestry, symphony, leverage / מארג, סימפוניה, למנף); enforces asymmetric sentence rhythm (burstiness) instead of uniform paragraphs; and applies clean typography, including the Hebrew Academy of Language rules (no em/en dashes, straight quotes, the short Hebrew prefix hyphen).
 
 **Validation:** Before you post, a Python script (`validate_post.py`) scans your draft with regex and flags anything that will hurt reach:
 
