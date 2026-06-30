@@ -28,10 +28,11 @@ This is a **Claude Code skill** — install it once, and Claude knows how to hel
 
 - Explicit URLs in the body (`http://`, `www.`)
 - Implied URLs — `word.word` patterns LinkedIn auto-hyperlinks (e.g. `bit.ly`, `go.co`)
-- Em dashes `—` (formatting noise)
+- Em dashes `—`, en dashes `–`, semicolons `;`, and curly quotes `“ ”` (typography noise)
 - Bullet points instead of numbered lists
 - Engagement bait phrases
 - More than 5 hashtags or @mentions
+- AI "tells" (warnings): machine-lexicon words (tapestry, symphony, leverage / מארג, סימפוניה, למנף), academic transition phrases (Furthermore / יתרה מכך), manufactured confidence phrases ("Here's the thing" / "הנה העניין"), and the negation-contrast structure ("not X, not Y... it's Z")
 
 ---
 

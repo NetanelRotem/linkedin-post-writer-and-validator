@@ -10,6 +10,47 @@ import re
 import sys
 
 
+# --- AI-tell term lists (Hebrew + English) -------------------------------
+# English terms are matched with word boundaries; Hebrew terms are matched as
+# substrings so prefixed forms (e.g. "המארג") are still caught. These power the
+# "warning" rules below — they flag machine-sounding writing, not reach killers.
+
+MACHINE_LEXICON_EN = [
+    "tapestry", "landscape", "symphony", "beacon", "realm", "journey",
+    "leverage", "robust", "seamless", "transformative", "synergy",
+    "unlock potential", "unleash",
+]
+MACHINE_LEXICON_HE = [
+    "מארג", "סימפוניה", "מגדלור", "ממלכה", "למנף", "רובוסטי",
+    "טרנספורמטיבי", "סינרגיה", "לפתוח פוטנציאל", "לשחרר כוחות",
+]
+
+AI_TRANSITIONS_EN = [
+    "furthermore", "moreover", "additionally", "in conclusion",
+    "to sum up", "it'?s worth noting", "importantly",
+]
+AI_TRANSITIONS_HE = [
+    "יתרה מכך", "בנוסף לכך", "יתר על כן", "כמו כן",
+    "לסיכום", "בסופו של דבר", "ראוי לציין", "חשוב להדגיש",
+]
+
+AI_CONFIDENCE_EN = [
+    "here'?s the thing", "let that sink in", "read that again",
+    "let'?s dive in", "imagine a world where",
+]
+AI_CONFIDENCE_HE = [
+    "הנה העניין", "תן לזה לשקוע", "תקראו את זה שוב",
+    "בואו נצלול", "תארו לעצמכם",
+]
+
+
+def _alt_pattern(en_terms, he_terms):
+    """Build an alternation regex: English terms get word boundaries, Hebrew
+    terms are plain substrings (so attached prefixes still match)."""
+    parts = [rf"\b{t}\b" for t in en_terms] + list(he_terms)
+    return re.compile("|".join(parts), re.IGNORECASE)
+
+
 RULES = [
     {
         "id": "explicit_url",
@@ -33,6 +74,27 @@ RULES = [
         "pattern": re.compile(r"—"),
         "severity": "error",
         "message": lambda m: f"Found {len(m)} em dash(es) — replace with a comma, period, or line break",
+    },
+    {
+        "id": "en_dash",
+        "label": "En dash (–)",
+        "pattern": re.compile(r"–"),
+        "severity": "error",
+        "message": lambda m: f"Found {len(m)} en dash(es) (–) — replace with a comma, period, or line break",
+    },
+    {
+        "id": "semicolon",
+        "label": "Semicolon (;)",
+        "pattern": re.compile(r";"),
+        "severity": "error",
+        "message": lambda m: f"Found {len(m)} semicolon(s) — replace with a period or comma",
+    },
+    {
+        "id": "curly_quotes",
+        "label": "Curly quotes (“ ” ‘ ’)",
+        "pattern": re.compile(r"[“”‘’]"),
+        "severity": "error",
+        "message": lambda m: f"Found {len(m)} curly quote(s) — use straight quotes (\") only",
     },
     {
         "id": "bullet_points",
@@ -67,6 +129,39 @@ RULES = [
         "threshold": 5,
         "severity": "error",
         "message": lambda m: f"Found {len(m)} @mentions — reduce to 5 max to avoid spam flag",
+    },
+    {
+        "id": "machine_lexicon",
+        "label": "Machine-lexicon words (AI tell)",
+        "pattern": _alt_pattern(MACHINE_LEXICON_EN, MACHINE_LEXICON_HE),
+        "severity": "warning",
+        "message": lambda m: f"Found machine-lexicon word(s): {', '.join(sorted(set(m)))} → rewrite in plain language",
+    },
+    {
+        "id": "ai_transitions",
+        "label": "Academic/transition connectors (AI tell)",
+        "pattern": _alt_pattern(AI_TRANSITIONS_EN, AI_TRANSITIONS_HE),
+        "severity": "warning",
+        "message": lambda m: f"Found transition phrase(s): {', '.join(sorted(set(m)))} → remove or rephrase directly",
+    },
+    {
+        "id": "ai_confidence_phrases",
+        "label": "Manufactured confidence phrases (AI tell)",
+        "pattern": _alt_pattern(AI_CONFIDENCE_EN, AI_CONFIDENCE_HE),
+        "severity": "warning",
+        "message": lambda m: f"Found confidence phrase(s): {', '.join(sorted(set(m)))} → state the point directly",
+    },
+    {
+        "id": "negation_contrast",
+        "label": "Negation-contrast structure (AI tell)",
+        # "(it's) not X ... not Y ... but/instead/אלא Z" within one sentence
+        "pattern": re.compile(
+            r"(?:\bnot\b|\bלא\b)[^.\n;]{0,80}(?:\bnot\b|\bלא\b)[^.\n;]{0,80}"
+            r"(?:\bbut\b|\binstead\b|\brather\b|\bאלא\b)",
+            re.IGNORECASE,
+        ),
+        "severity": "warning",
+        "message": lambda m: f"Found {len(m)} negation-contrast structure(s) ('not X, not Y... it's Z') → state it positively",
     },
 ]
 
@@ -114,6 +209,13 @@ def validate_post(text: str) -> dict:
 
 
 def main():
+    # Ensure UTF-8 output so the ✓/❌ glyphs and Hebrew text print on consoles
+    # whose default encoding can't represent them (e.g. Windows cp1252).
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except (AttributeError, ValueError):
+        pass
+
     if len(sys.argv) > 1:
         path = sys.argv[1]
         with open(path, encoding="utf-8") as f:
