@@ -60,6 +60,14 @@ Requires [Claude Code](https://claude.ai/code).
 
 ## Validate a post manually
 
+After installing the skill, copy the validator to your project root:
+
+```bash
+cp .agents/skills/linkedin-post-writer-and-validator/scripts/validate_post.py .
+```
+
+Then run it:
+
 ```bash
 python validate_post.py my-post.txt
 ```
@@ -71,3 +79,5 @@ echo "your post text here" | python validate_post.py
 ```
 
 Exit code `0` = clean. Exit code `1` = errors found.
+
+Alternatively, just ask Claude to validate your post — it will use the installed script automatically.
