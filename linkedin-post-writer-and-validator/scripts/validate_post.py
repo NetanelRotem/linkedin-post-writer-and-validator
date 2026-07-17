@@ -18,11 +18,14 @@ import sys
 MACHINE_LEXICON_EN = [
     "tapestry", "landscape", "symphony", "beacon", "realm", "journey",
     "leverage", "robust", "seamless", "transformative", "synergy",
-    "unlock potential", "unleash",
+    "unlock potential", "unleash", "delve", "deep dive", "game[- ]changer",
+    "double down", "harness", "empower", "elevate",
 ]
 MACHINE_LEXICON_HE = [
     "מארג", "סימפוניה", "מגדלור", "ממלכה", "למנף", "רובוסטי",
     "טרנספורמטיבי", "סינרגיה", "לפתוח פוטנציאל", "לשחרר כוחות",
+    "צלילת עומק", "משנה משחק", "לפרק לגורמים", "להכפיל מאמצים",
+    "לרתום", "להעצים", "להעלות מדרגה",
 ]
 
 AI_TRANSITIONS_EN = [
@@ -42,6 +45,28 @@ AI_CONFIDENCE_HE = [
     "הנה העניין", "תן לזה לשקוע", "תקראו את זה שוב",
     "בואו נצלול", "תארו לעצמכם",
 ]
+
+THROAT_CLEARING_EN = [
+    "the truth is", "let me be clear", "it turns out", "make no mistake",
+    "can we talk about", "here'?s what i mean", "what if i told you",
+    "plot twist", "spoilers?", "fun fact",
+]
+THROAT_CLEARING_HE = [
+    "האמת היא ש", "בואו נהיה כנים", "מסתבר ש", "בואו נדבר רגע על",
+    "הנה למה זה חשוב", "מה אם הייתי אומר", "טוויסט בעלילה", "ספוילר:",
+]
+
+EMPTY_INTENSIFIERS_EN = [
+    "really", "truly", "literally", "genuinely", "honestly",
+    "fundamentally", "incredibly", "inherently", "crucially",
+]
+EMPTY_INTENSIFIERS_HE = [
+    "באופן מהותי", "בצורה משמעותית", "באמת ובתמים", "ללא ספק",
+    "ברמות אחרות",
+]
+
+LAZY_EXTREMES_EN = ["everyone", "everybody", "nobody", "always", "never"]
+LAZY_EXTREMES_HE = ["כולם", "תמיד", "אף פעם", "אף אחד"]
 
 
 def _alt_pattern(en_terms, he_terms):
@@ -150,6 +175,37 @@ RULES = [
         "pattern": _alt_pattern(AI_CONFIDENCE_EN, AI_CONFIDENCE_HE),
         "severity": "warning",
         "message": lambda m: f"Found confidence phrase(s): {', '.join(sorted(set(m)))} → state the point directly",
+    },
+    {
+        "id": "throat_clearing",
+        "label": "Throat-clearing / meta-commentary (AI tell)",
+        "pattern": _alt_pattern(THROAT_CLEARING_EN, THROAT_CLEARING_HE),
+        "severity": "warning",
+        "message": lambda m: f"Found throat-clearing phrase(s): {', '.join(sorted(set(m)))} → delete the warm-up, open with the point",
+    },
+    {
+        "id": "empty_intensifiers",
+        "label": "Stacked empty intensifiers (AI tell)",
+        "pattern": _alt_pattern(EMPTY_INTENSIFIERS_EN, EMPTY_INTENSIFIERS_HE),
+        "threshold": 2,
+        "severity": "warning",
+        "message": lambda m: f"Found {len(m)} empty intensifiers ({', '.join(sorted(set(m)))}) → cut the ones the sentence survives without",
+    },
+    {
+        "id": "lazy_extremes",
+        "label": "Lazy extremes (AI tell)",
+        "pattern": _alt_pattern(LAZY_EXTREMES_EN, LAZY_EXTREMES_HE),
+        "threshold": 2,
+        "severity": "warning",
+        "message": lambda m: f"Found {len(m)} absolute extremes ({', '.join(sorted(set(m)))}) → state the real, bounded scope",
+    },
+    {
+        "id": "rhetorical_setup",
+        "label": "Self-answered rhetorical question (AI tell)",
+        # A question immediately answered: "Why does this matter? Because..." / "למה? כי..."
+        "pattern": re.compile(r"\?\s*(?:because\b|כי\s)", re.IGNORECASE),
+        "severity": "warning",
+        "message": lambda m: f"Found {len(m)} self-answered question(s) ('Why? Because...' / 'למה? כי...') → make the point directly",
     },
     {
         "id": "negation_contrast",

@@ -26,7 +26,7 @@ This is a **Claude Code skill** — install it once, and Claude knows how to hel
 
 **Writing:** Claude guides you through a proven post structure (hook → problem → solution → proof → CTA), adapted for Hebrew or English, with formatting rules tuned for mobile and LinkedIn's 2026 Interest Graph algorithm.
 
-**Human voice (defeating AI detection):** A dedicated rule set keeps the output from reading as machine-generated, in both Hebrew and English. It bans the negation-contrast structure, academic transition words, and manufactured "Here's the thing" openers; blocks the machine lexicon (tapestry, symphony, leverage / מארג, סימפוניה, למנף); enforces asymmetric sentence rhythm (burstiness) instead of uniform paragraphs; and applies clean typography, including the Hebrew Academy of Language rules (no em/en dashes, straight quotes, the short Hebrew prefix hyphen).
+**Human voice (defeating AI detection):** A dedicated rule set keeps the output from reading as machine-generated, in both Hebrew and English. It bans the negation-contrast structure, academic transition words, manufactured "Here's the thing" openers, throat-clearing warm-ups ("The truth is" / "האמת היא ש..."), meta-commentary labels ("Plot twist:" / "ספוילר:"), and self-answered rhetorical questions; blocks the machine lexicon (tapestry, symphony, leverage, delve, game-changer / מארג, סימפוניה, למנף, משנה משחק); cuts stacked empty intensifiers, lazy extremes (everyone/always / כולם/תמיד), false agency ("the data tells us" / "הנתונים מספרים לנו"), tidy three-item lists, and pull-quote aphorisms; enforces asymmetric sentence rhythm (burstiness) instead of uniform paragraphs; and applies clean typography, including the Hebrew Academy of Language rules (no em/en dashes, straight quotes, the short Hebrew prefix hyphen).
 
 **Validation:** Before you post, a Python script (`validate_post.py`) scans your draft with regex and flags anything that will hurt reach:
 
@@ -36,7 +36,7 @@ This is a **Claude Code skill** — install it once, and Claude knows how to hel
 - Bullet points instead of numbered lists
 - Engagement bait phrases
 - More than 5 hashtags or @mentions
-- AI "tells" (warnings): machine-lexicon words (tapestry, symphony, leverage / מארג, סימפוניה, למנף), academic transition phrases (Furthermore / יתרה מכך), manufactured confidence phrases ("Here's the thing" / "הנה העניין"), and the negation-contrast structure ("not X, not Y... it's Z")
+- AI "tells" (warnings): machine-lexicon words (tapestry, symphony, leverage, delve, game-changer / מארג, סימפוניה, למנף, משנה משחק), academic transition phrases (Furthermore / יתרה מכך), manufactured confidence phrases ("Here's the thing" / "הנה העניין"), throat-clearing and meta-commentary ("The truth is" / "האמת היא ש...", "Plot twist:"), stacked empty intensifiers (really/truly/literally / באופן מהותי), lazy extremes (everyone/always/never / כולם/תמיד), self-answered rhetorical questions ("Why? Because..." / "למה? כי..."), and the negation-contrast structure ("not X, not Y... it's Z")
 
 ---
 

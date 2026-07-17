@@ -164,6 +164,9 @@ These rules apply to **both Hebrew and English**. They are hard rules, not sugge
   - ✅ "הצלחה בתעשייה הזו דורשת בעיקר מערכת עבודה קבועה."
 - **No academic/transition connectors:** Furthermore, Moreover, Additionally, In conclusion, To sum up, It's worth noting, Importantly / יתרה מכך, בנוסף לכך, יתר על כן, כמו כן, לסיכום, בסופו של דבר, ראוי לציין, חשוב להדגיש.
 - **No manufactured reader-engagement phrases:** "Here's the thing", "Let that sink in", "Read that again", "Let's dive in", "Imagine a world where" / "הנה העניין", "תן לזה לשקוע", "תקראו את זה שוב", "בואו נצלול פנימה", "תארו לעצמכם עולם שבו". These appear 20-34x more often in AI text and create instant antagonism.
+- **No throat-clearing openers.** Do not warm up before the point: "The truth is", "Let me be clear", "It turns out", "Make no mistake", "Can we talk about" / "האמת היא ש...", "בואו נהיה כנים", "מסתבר ש...", "בואו נדבר רגע על...". Delete the warm-up and open with the point itself.
+- **No meta-commentary labels:** "Plot twist:", "Spoiler:", "Hint:", "Fun fact:" / "טוויסט בעלילה:", "ספוילר:", "רמז:", "עובדה מעניינת:". They announce cleverness instead of delivering it.
+- **No rhetorical setups.** Do not announce an insight before delivering it: "Here's what I mean:", "What if I told you...", or a question you answer yourself in the next breath ("Why does this matter? Because...") / "הנה למה זה חשוב:", "מה אם הייתי אומר לכם ש...", "למה זה משנה? כי...". Make the point directly and let the reader reach the conclusion.
 - **No hollow summary paragraph.** Do not end by re-listing what the post already said. Close with a concrete thought, an interesting number, or a direct question.
 
 ### 8.2 Machine lexicon blocklist
@@ -185,6 +188,15 @@ These words appear 10-40x more often in AI text than in natural business writing
 | synergy | סינרגיה |
 | unlock potential | לפתוח פוטנציאל |
 | unleash | לשחרר כוחות |
+| delve | לצלול לעומק |
+| deep dive | צלילת עומק |
+| game-changer | משנה משחק |
+| navigate (challenges) | לנווט את (האתגרים) |
+| unpack (an idea) | לפרק לגורמים |
+| double down | להכפיל מאמצים |
+| harness | לרתום |
+| empower | להעצים |
+| elevate | להעלות מדרגה |
 
 ### 8.3 Grammar tells
 
@@ -194,6 +206,11 @@ These words appear 10-40x more often in AI text than in natural business writing
 - **No synonym cycling.** Repeat the exact, clearest word. If the subject is "developers" / "מפתחים", keep saying "developers" / "מפתחים". Do not rotate to engineers → builders / מהנדסים → בונים for variety.
 - **No inflated ranges.** Do not write "solves everything from simple task management to multi-year global financial planning" / "החל מניהול משימות פשוט ועד לתכנון פיננסי גלובלי רב-שנתי". State the real, bounded scope.
 - **No hollow EEAT empathy.** Replace generic "Imagine you arrive at the office and all your servers crashed" / "תארו לעצמכם שאתם מגיעים למשרד וכל השרתים קרסו" with one specific, concrete detail: "Last Tuesday at 8am our main server crashed" / "ביום שלישי האחרון בשמונה בבוקר השרת המרכזי שלנו קרס".
+- **Cut empty intensifiers.** Adverbs that add emphasis without information: really, truly, literally, genuinely, honestly, fundamentally, incredibly / "באופן מהותי", "בצורה משמעותית", "באמת ובתמים", "ללא ספק", "ברמות אחרות". One natural "ממש" or "פשוט" in spoken Hebrew is fine; stacked intensifiers are a machine tell. If the sentence survives without the word, delete the word.
+- **Name the human (no false agency).** Inanimate things do not act: not "the data tells us", "the decision emerged", "the numbers speak for themselves" / "הנתונים מספרים לנו", "ההחלטה נולדה מעצמה", "המספרים מדברים בעד עצמם". Say who did what: "we measured and found" / "מדדנו ומצאנו", "המנכ\"ל החליט".
+- **No lazy extremes.** Replace "everyone", "always", "never", "nobody" / "כולם", "תמיד", "אף פעם", "אף אחד" with the real, bounded scope: "8 out of the 10 clients I met this year" / "8 מתוך 10 לקוחות שפגשתי השנה".
+- **Two beats three.** The neat three-item list ("faster, cheaper, better" / "מהיר יותר, זול יותר, טוב יותר") is the default AI rhythm. Prefer two items, or four with real detail. Never close a post on a tidy triple.
+- **Kill the pull-quotes.** If a line in the body sounds like it was written to be framed on a slide ("Success is a system, not an event" / "הצלחה היא מערכת, לא אירוע"), rewrite it as a plain claim backed by evidence. One exception: the takeaway line at the close (§3A) — and even that must be concrete and earned by the post, not a generic aphorism.
 - **Take one sharp position.** Always express a clear, one-sided opinion grounded in a specific case. Never balance symmetric pros and cons.
 
 ### 8.4 Burstiness — forced asymmetric rhythm
@@ -234,9 +251,15 @@ Before delivering the final post, verify:
 - [ ] No semicolons (;) and no curly quotes (“ ”) — straight quotes (") only
 - [ ] No machine-lexicon words (§8.2: tapestry/מארג, symphony/סימפוניה, leverage/למנף, etc.)
 - [ ] No banned transition or confidence phrases (§8.1: Furthermore/יתרה מכך, "Here's the thing"/"הנה העניין")
+- [ ] No throat-clearing openers or meta-commentary labels ("The truth is"/"האמת היא ש...", "Plot twist:"/"ספוילר:")
+- [ ] No rhetorical setups — no question the post answers itself, no "Here's what I mean"/"הנה למה זה חשוב"
 - [ ] No negation-contrast structure ("not X, not Y... it's Z")
 - [ ] Asymmetric sentence rhythm — varied lengths, not uniform paragraphs (§8.4 burstiness)
 - [ ] No synonym cycling — repeats the exact key word
+- [ ] No stacked empty intensifiers (really/truly/literally, "באופן מהותי"/"ללא ספק")
+- [ ] No false agency — humans act, not "the data"/"הנתונים" (§8.3)
+- [ ] No lazy extremes (everyone/always/never, כולם/תמיד/אף פעם) — real scope stated
+- [ ] No tidy three-item lists and no pull-quote aphorisms in the body (§8.3)
 - [ ] No bold-headed list items ("Speed: ...")
 - [ ] Proof is concrete and specific, not generic empathy
 - [ ] No engagement bait phrases
